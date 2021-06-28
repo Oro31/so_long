@@ -1,0 +1,2 @@
+jeu: main.c image.c draw.c deplacer.c ft_free.c ft_init.c ft_key_hook.c load_xpmfiles.c parse_map.c valid_map.c monde.c
+	clang main.c image.c draw.c deplacer.c ft_free.c ft_init.c ft_key_hook.c load_xpmfiles.c parse_map.c valid_map.c monde.c ../minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm
