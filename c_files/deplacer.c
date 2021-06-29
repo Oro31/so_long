@@ -18,7 +18,16 @@ int	ft_is_not_wall(t_vars *vars, char c, int s)
 
 void	ft_change_ply_attributes(t_ply *ply, int x, int y, char c)
 {
+	char	*ndep;
+	int	i;
+
 	ply->ndep += 1;
+	ndep = ft_itoa(ply->ndep);
+	i = -1;
+	while (ndep[++i])
+		write(1, &ndep[i], 1);
+	write(1, "\n", 1);
+	free(ndep);
 	if (c == 'y')
 	{
 		ply->ydir = (1 + y) / 2;

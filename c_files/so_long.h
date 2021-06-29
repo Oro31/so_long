@@ -51,6 +51,9 @@ typedef	struct	s_vars {
 	int	height;
 }		t_vars;
 
+char	*ft_itoa(int nb);
+char	*ft_realloc_itoa(char *str, char c);
+
 /*draw.c*/
 
 void	ft_put_pixel_on_img(t_data *img, int color, int x, int y);
