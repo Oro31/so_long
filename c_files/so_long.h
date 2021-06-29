@@ -1,5 +1,6 @@
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
+#include "../gnl/get_next_line.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
@@ -27,7 +28,7 @@ typedef	struct	s_map {
 	t_data	collect;
 	t_data	cdoor;
 	t_data	odoor;
-	int	**map;
+	char	**map;
 	int	ncol;
 	int	posxe;
 	int	posye;
@@ -45,6 +46,7 @@ typedef	struct	s_vars {
 	t_ply	ply;
 	t_map	monde;
 	t_rsl	rsl;
+	int	end;
 	int	width;
 	int	height;
 }		t_vars;
@@ -69,7 +71,7 @@ int	ft_get_xpm_pixel(t_data *img, int x, int y);
 /*deplacer.c*/
 
 int	ft_is_not_wall(t_vars *vars, char c, int s);
-void	ft_change_ply_attributes(t_ply *ply, int x, int y);
+void	ft_change_ply_attributes(t_ply *ply, int x, int y, char c);
 void	ft_deplacer(t_vars *vars);
 
 /*#############################*/
@@ -77,6 +79,7 @@ void	ft_deplacer(t_vars *vars);
 /*ft_key_hook.c*/
 
 void	ft_close(t_vars *vars);
+int	ft_exit(t_vars *vars);
 void	ft_moove(t_vars *vars, char c);
 int	ft_key_hook(int keycode, t_vars *vars);
 
@@ -85,7 +88,7 @@ int	ft_key_hook(int keycode, t_vars *vars);
 /*load_xpmfiles.c*/
 
 void	ft_new_xpm_image(t_vars *vars, t_data *data, char *str);
-void	ft_load_xpmfiles(t_vars *vars);
+int	ft_load_xpmfiles(t_vars *vars);
 
 /*#############################*/
 

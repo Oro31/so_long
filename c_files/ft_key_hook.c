@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void	ft_close(vars *vars)
+void	ft_close(t_vars *vars)
 {
 	if (vars->img.img)
 		mlx_destroy_image(vars->mlx, vars->img.img);
@@ -12,7 +12,14 @@ void	ft_close(vars *vars)
 		if (vars->mlx)
 			free(vars->mlx);
 	}
+}
+
+int	ft_exit(t_vars *vars)
+{
+	ft_free(vars);
+	ft_close(vars);
 	exit(0);
+	return (0);
 }
 
 void	ft_moove(t_vars *vars, char c)
@@ -30,17 +37,16 @@ void	ft_moove(t_vars *vars, char c)
 	if (vars->monde.map[vars->ply.posy][vars->ply.posx] == 'C')
 		vars->monde.ncol--;
 	if (vars->monde.ncol == 0)
-		vars->monde.map[posye][posxe] = 'e';
+		vars->monde.map[vars->monde.posye][vars->monde.posxe] = 'e';
+	if (vars->monde.map[vars->ply.posy][vars->ply.posx] == 'e')
+		vars->end = 1;
 	vars->monde.map[vars->ply.posy][vars->ply.posx] = 'P';
 }
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
-	{
-		ft_free(vars);
-		ft_close(vars);
-	}
+		return (ft_exit(vars));
 	else if (keycode == 119) /*may be 122 with azerty*/
 		ft_moove(vars, 'w');
 	else if (keycode == 115)
@@ -49,5 +55,8 @@ int	ft_key_hook(int keycode, t_vars *vars)
 		ft_moove(vars, 'a');
 	else if (keycode == 100)
 		ft_moove(vars, 'd');
+	ft_draw(vars);
+	if (vars->end == 1)
+		return (ft_exit(vars));
 	return (1);
 }

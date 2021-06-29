@@ -10,11 +10,21 @@ void	ft_new_xpm_image(t_vars *vars, t_data *data, char *str)
 			&data->e);
 }
 
-void	ft_load_xpmfiles(t_vars *vars)
+int	ft_load_xpmfiles(t_vars *vars)
 {
-	ft_new_xpm_image(vars, &vars->monde.space, "images/ground.XPM");
-	ft_new_xpm_image(vars, &vars->monde.collect, "images/collectibles.XPM");
-	ft_new_xpm_image(vars, &vars->monde.cdoor, "images/closeddoor.XPM");
-	ft_new_xpm_image(vars, &vars->monde.odoor, "images/opendoor.XPM");
-	ft_new_xpm_image(vars, &vars->ply.spr, "images/playeur.XPM");
+	ft_new_xpm_image(vars, &vars->monde.space,
+			"../images/ground.XPM");
+	ft_new_xpm_image(vars, &vars->monde.collect,
+			"../images/collectibles.XPM");
+	ft_new_xpm_image(vars, &vars->monde.cdoor,
+			"../images/closeddoor.XPM");
+	ft_new_xpm_image(vars, &vars->monde.odoor,
+			"../images/opendoor.XPM");
+	ft_new_xpm_image(vars, &vars->ply.spr, "../images/playeur.XPM");
+	if (vars->monde.space.img == NULL || vars->monde.collect.img == NULL ||
+			vars->monde.cdoor.img == NULL ||
+			vars->monde.odoor.img == NULL ||
+			vars->ply.spr.img == NULL)
+		return (0);
+	return (1);
 }

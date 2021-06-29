@@ -49,8 +49,13 @@ int	ft_init_before_parse(t_vars *vars)
 	vars->monde.ncol = 0;
 	vars->monde.posxe = -1;
 	vars->monde.posye = -1;
+	vars->end = 0;
 	vars->mlx = mlx_init();
 	if (!(vars->mlx))
 		return (0);
+	vars->monde.map = malloc(sizeof(char*));
+	if (!(vars->monde.map))
+		return (0);
+	vars->monde.map[0] = NULL;
 	return (1);
 }

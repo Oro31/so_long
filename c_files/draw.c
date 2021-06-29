@@ -21,9 +21,11 @@ void	ft_get_background(t_vars *vars)
 		while (i < vars->rsl.w)
 		{
 			if (vars->monde.map[j / 24][i / 24] != '1')
-			color = ft_get_xpm_pixel(&vars->monde.space, i % 24,
-					j % 24);
-			ft_put_pixel_on_img(&vars->img, color, i, j);
+			{
+				color = ft_get_xpm_pixel(&vars->monde.space,
+						i % 24, j % 24);
+				ft_put_pixel_on_img(&vars->img, color, i, j);
+			}
 			i++;
 		}
 		j++;
@@ -42,8 +44,12 @@ void	ft_get_visual(t_vars *vars)
 		i = 0;
 		while (i < vars->rsl.w)
 		{
-			color = ft_myxpm_pixelput(vars, i , j);
-			ft_put_pixel_on_img(&vars->img, color, i, j);
+			if (vars->monde.map[j / 24][i / 24] != '1' &&
+					vars->monde.map[j / 24][i / 24] != '0')
+			{
+				color = ft_myxpm_pixelput(vars, i , j);
+				ft_put_pixel_on_img(&vars->img, color, i, j);
+			}
 			i++;
 		}
 		j++;
