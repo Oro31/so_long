@@ -29,14 +29,12 @@ int		ft_len_mpline(char *line)
 	return (i);
 }
 
-char	*ft_linemap_realloc(char **map, int i)
+char	*ft_linemap_realloc(char **map, int i, int maxlen)
 {
 	int		j;
 	int		len;
-	int		maxlen;
 	char	*tmp;
 
-	maxlen = ft_lenmax_mpline(map);
 	len = ft_len_mpline(map[i]);
 	tmp = malloc(sizeof(char) * (maxlen + 1));
 	if (tmp == NULL)
@@ -53,6 +51,7 @@ char	*ft_linemap_realloc(char **map, int i)
 		tmp[j] = '9';
 		j++;
 	}
+	free(map[i]);
 	return (tmp);
 }
 
@@ -85,26 +84,26 @@ char	**ft_parse_map(char *line, char **map)
 {
 	int		i;
 	int		fstdm;
+	int		maxlen;
 	char	**tmp;
 
-	i = 0;
-	while (map[i])
-		i++;
-	fstdm = i + 1;
-	tmp = malloc(sizeof(char*) * (fstdm + 1));
+	fstdm = 0;
+	while (map[fstdm])
+		fstdm++;
+	tmp = malloc(sizeof(char*) * (fstdm + 2));
 	if (tmp == NULL)
 		return (NULL);
-	tmp[fstdm] = NULL;
+	tmp[fstdm + 1] = NULL;
+	maxlen = ft_lenmax_mpline(map);
 	i = -1;
-	while (++i < (fstdm - 1))
+	while (++i < (fstdm))
 	{
-		tmp[i] = ft_linemap_realloc(map, i);
+		tmp[i] = ft_linemap_realloc(map, i, maxlen);
 		if (!(tmp[i]))
 			return (NULL);
-		free(map[i]);
 	}
-	tmp[fstdm - 1] = ft_linemap_fill(line, ft_lenmax_mpline(map));
-	if (!(tmp[fstdm - 1]))
+	tmp[fstdm] = ft_linemap_fill(line, maxlen);
+	if (!(tmp[fstdm]))
 		return (NULL);
 	free(map);
 	return (tmp);

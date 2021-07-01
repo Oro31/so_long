@@ -20,7 +20,7 @@ void	ft_get_background(t_vars *vars)
 		i = 0;
 		while (i < vars->rsl.w)
 		{
-			if (vars->monde.map[j / 24][i / 24] != '1')
+			if (vars->monde.map[j / 24][i / 24] != '0')
 			{
 				color = ft_get_xpm_pixel(&vars->monde.space,
 						i % 24, j % 24);
@@ -58,6 +58,8 @@ void	ft_get_visual(t_vars *vars)
 
 void	ft_draw(t_vars *vars)
 {
+	if (vars->img.img)
+		mlx_destroy_image(vars->mlx, vars->img.img);
 	vars->img.img = mlx_new_image(vars->mlx, vars->rsl.w, vars->rsl.h);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bpp,
 			&vars->img.ll, &vars->img.e);

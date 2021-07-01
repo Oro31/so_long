@@ -8,7 +8,7 @@ char	*ft_realloc_itoa(char *str, char c)
 	i = 0;
 	while (str[i])
 		i++;
-	tmp = malloc(sizeof(char) * (i + 1));
+	tmp = malloc(sizeof(char) * (i + 2));
 	tmp[0] = c;
 	tmp[i + 1] = '\0';
 	i = 0;

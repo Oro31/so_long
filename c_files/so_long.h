@@ -116,7 +116,7 @@ int	ft_init_before_parse(t_vars *vars);
 
 int	ft_ismap_member(char c);
 int	ft_len_mpline(char *line);
-char	*ft_linemap_realloc(char ** map, int i);
+char	*ft_linemap_realloc(char **map, int i, int maxlen);
 char	*ft_linemap_fill(char *line, int maxlen);
 char	**ft_parse_map(char *line, char **map);
 
